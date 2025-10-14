@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dokumen Pendukung Ela Rahma Sari</title>
+<style>
+  body { font-family: 'Times New Roman', serif; margin: 0; background: #f9f9f9; color: #333; }
+  header { text-align: center; padding: 30px; background: #004aad; color: white; }
+  h1 { margin: 0; }
+  main { max-width: 800px; margin: 30px auto; background: white; padding: 20px; border-radius: 8px; }
+  section { margin-bottom: 30px; }
+  h2 { border-bottom: 2px solid #004aad; padding-bottom: 5px; color: #004aad; }
+  ul { padding-left: 20px; }
+  .cert { background: #f0f0f0; padding: 10px; margin-bottom: 10px; border-radius: 6px; text-align: center; }
+  .gallery { display: flex; gap: 10px; overflow-x: auto; }
+  .gallery img { width: 48%; border-radius: 6px; cursor: pointer; transition: transform 0.3s; }
+  .gallery img:hover { transform: scale(1.03); }
+  footer { text-align: center; font-size: 0.9em; padding: 20px; background: #eee; color: #666; }
+
+  /* 🔹 Khusus untuk bagian ijazah: tampil lebih kecil */
+  .cert.ijazah img {
+   width: 70%;
+   max-width: 550px;
+  }
+
+ 
+  /* Lightbox */
+  .lightbox {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.8);
+    justify-content: center;
+    align-items: center;
+  }
+  .lightbox img {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(255,255,255,0.4);
+  }
+  .close-btn, .prev-btn, .next-btn {
+    position: absolute;
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    user-select: none;
+  }
+  .close-btn { top: 20px; right: 30px; }
+  .prev-btn, .next-btn {
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 10px;
+    background: rgba(0,0,0,0.4);
+    border-radius: 50%;
+  }
+  .prev-btn { left: 30px; }
+  .next-btn { right: 30px; }
+
+  a:hover { text-decoration: underline; color: #fff; }
+</style>
+
+<script>
+  // Nonaktifkan klik kanan dan kombinasi tombol tertentu
+  document.addEventListener('contextmenu', event => event.preventDefault());
+  document.addEventListener('keydown', function(e) {
+    if ((e.ctrlKey && (e.key === 's' || e.key === 'u' || e.key === 'p')) || e.key === 'PrintScreen') {
+      alert("Aksi ini dinonaktifkan untuk menjaga privasi dokumen.");
+      e.preventDefault();
+    }
+  });
+
+  // Fungsi Lightbox dengan navigasi
+  document.addEventListener("DOMContentLoaded", function() {
+    const images = Array.from(document.querySelectorAll("main img"));
+    let currentIndex = 0;
+
+    const lightbox = document.createElement("div");
+    lightbox.classList.add("lightbox");
+    lightbox.innerHTML = `
+      <span class="close-btn">&times;</span>
+      <span class="prev-btn">&#10094;</span>
+      <img src="" alt="Preview">
+      <span class="next-btn">&#10095;</span>
+    `;
+    document.body.appendChild(lightbox);
+
+    const lightboxImg = lightbox.querySelector("img");
+    const closeBtn = lightbox.querySelector(".close-btn");
+    const prevBtn = lightbox.querySelector(".prev-btn");
+    const nextBtn = lightbox.querySelector(".next-btn");
+
+    function showImage(index) {
+      if (index < 0) index = images.length - 1;
+      if (index >= images.length) index = 0;
+      currentIndex = index;
+      lightboxImg.src = images[currentIndex].src;
+      lightbox.style.display = "flex";
+    }
+
+    images.forEach((img, index) => {
+      img.addEventListener("click", () => showImage(index));
+    });
+
+    closeBtn.addEventListener("click", () => lightbox.style.display = "none");
+    prevBtn.addEventListener("click", () => showImage(currentIndex - 1));
+    nextBtn.addEventListener("click", () => showImage(currentIndex + 1));
+
+    lightbox.addEventListener("click", (e) => {
+      if (e.target === lightbox) lightbox.style.display = "none";
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (lightbox.style.display === "flex") {
+        if (e.key === "ArrowLeft") showImage(currentIndex - 1);
+        if (e.key === "ArrowRight") showImage(currentIndex + 1);
+        if (e.key === "Escape") lightbox.style.display = "none";
+      }
+    });
+  });
+</script>
+</head>
+
+<body>
+<header>
+  <h1>Ela Rahma Sari</h1>
+  <p>Lulusan S1 Teknik Kimia Universitas Lambung Mangkurat</p>
+  <p>
+    <a href="mailto:elarahmasari11@gmail.com" style="color:#cde3ff; margin-right:10px;">✉️ elarahmasari11@gmail.com</a> |
+    <a href="https://www.linkedin.com/in/elarahmasari" target="_blank" style="color:#cde3ff; margin-left:10px;">💼 LinkedIn</a>
+  </p>
+</header>  
+
+<main>
+  <section>
+    <h2>🏆 Pencapaian</h2>
+    <ul>
+      <li>Peserta Pendanaan Indofood Riset Nugraha Periode 2024/2025</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>🎓 Ijazah</h2>
+    <div class="cert ijazah">
+  <strong>Ijazah Sarjana Teknik Kimia</strong><br>
+  <a href="#ijazah"><img src="ijazah.jpg" alt="Ijazah Ela Rahma Sari"></a>
+</div>
+
+  </section>
+
+  <section>
+    <h2>🔬 Sertifikat Magang</h2>
+    <div class="cert">
+      <strong>Magang di PT.SMART Tbk Unit Tarjun</strong><br>
+      <div class="gallery">
+        <img src="sertifikat1.jpg" alt="Sertifikat Magang Halaman 1 - Ela Rahma Sari">
+        <img src="sertifikat2.jpg" alt="Sertifikat Magang Halaman 2 - Ela Rahma Sari">
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>📑 Dokumen Pendukung Lainnya</h2>
+    <div class="cert">
+      <strong>Transkrip Nilai</strong><br>
+      <div class="gallery">
+        <img src="transkrip1.jpg" alt="Transkrip Nilai Halaman 1 - Ela Rahma Sari">
+        <img src="transkrip2.jpg" alt="Transkrip Nilai Halaman 2 - Ela Rahma Sari">
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  © 2025 Ela Rahma Sari — Semua hak cipta dilindungi.
+</footer>
+</body>
+</html>
